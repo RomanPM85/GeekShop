@@ -3,7 +3,13 @@ from django.shortcuts import render
 # Create your views here.
 
 def index(request):
-    return render(request, 'mainapp/index.html')
+    content = {
+        'title': 'geekShop',
+    }
+    return render(request, 'mainapp/index.html', content)
 
 def products(request):
-    return render(request, 'mainapp/products.html')
+    content = {
+        'title': 'geekShop - catalog'
+    }
+    return render(request, 'mainapp/products.html', content)
