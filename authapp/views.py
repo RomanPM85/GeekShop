@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponsePermanentRedirect
+from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import auth
 from django.urls import reverse
 
@@ -14,19 +14,19 @@ def login(request):
             user = auth.authenticate(username = username, password = password)
             if user and user.is_active:
                 auth.login(request, user)
-                return HttpResponsePermanentRedirect(reverse('index'))
+                return HttpResponseRedirect(reverse('index'))
     else:
         form = UserLoginForm()
     context = {'form': form}
     return render(request, 'authapp/login.html', context)
 
 def register(request):
-    if request.method =='POST':
+    if request.method == 'POST':
         form = UserRegisterForm(data=request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponsePermanentRedirect(reverse('auth:login'))
+            return HttpResponseRedirect(reverse('auth:login'))
         else:
             form = UserRegisterForm()
-        context = {'form':form}
+        context = {'form': form}
     return render(request, 'authapp/register.html', context)
