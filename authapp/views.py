@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponsePermanentRedirect
 from django.contrib import auth
 from django.urls import reverse
 
-from authapp.forms import UserLoginForm
+from authapp.forms import UserLoginForm, UserRegisterForm
 from authapp.models import User
 
 def login(request):
@@ -21,4 +21,12 @@ def login(request):
     return render(request, 'authapp/login.html', context)
 
 def register(request):
-    return render(request, 'authapp/register.html')
+    if request.method =='POST':
+        form = UserRegisterForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponsePermanentRedirect(reverse('auth:login'))
+        else:
+            form = UserRegisterForm()
+        context = {'form':form}
+    return render(request, 'authapp/register.html', context)
