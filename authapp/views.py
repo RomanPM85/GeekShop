@@ -27,6 +27,8 @@ def register(request):
             form.save()
             messages.success(request, 'Вы успешно зарегистрировались!')
             return HttpResponseRedirect(reverse('auth:login'))
+        else:
+            print(form.errors)
     else:
         form = UserRegisterForm()
     context = {'form': form}
