@@ -5,6 +5,7 @@ from django.urls import reverse
 from authapp.forms import UserLoginForm, UserRegisterForm, UserProfileForm
 from authapp.models import User
 
+
 def login(request):
     if request.method == 'POST':
         form = UserLoginForm(data=request.POST)
@@ -20,6 +21,7 @@ def login(request):
     context = {'form': form}
     return render(request, 'authapp/login.html', context)
 
+
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(data=request.POST)
@@ -34,9 +36,11 @@ def register(request):
     context = {'form': form}
     return render(request, 'authapp/register.html', context)
 
+
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('index'))
+
 
 def profile(request):
     if request.method == 'POST':

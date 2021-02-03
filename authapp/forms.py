@@ -2,6 +2,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, User
 
 from authapp.models import User
 
+
 class UserLoginForm(AuthenticationForm):
     class Meta:
         model = User
@@ -13,6 +14,7 @@ class UserLoginForm(AuthenticationForm):
         self.fields['password'].widget.attrs['placeholder'] = 'Введите пароль'
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
+
 
 class UserRegisterForm(UserCreationForm):
     class Meta:
@@ -29,6 +31,7 @@ class UserRegisterForm(UserCreationForm):
         self.fields['password2'].widget.attrs['placeholder'] = 'Подтвердите пароль'
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
+
 
 class UserProfileForm(UserChangeForm):
     class Meta:

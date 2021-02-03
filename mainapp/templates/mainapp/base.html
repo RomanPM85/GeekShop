@@ -11,7 +11,7 @@
 
     <title>
         {% block title %}
-            {{ title|title }}
+        {{ title|title }}
         {% endblock %}
     </title>
 
@@ -43,16 +43,17 @@
                     <a class="nav-link" href="{% url 'auth:login' %}">Войти <i class="fas fa-sign-in-alt"></i></a>
                 </li>
                 {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'auth:profile' %}">{{ user.username }} <i class="fas fa-user-circle"></i></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'auth:logout' %}">Выйти <i class="fas fa-sign-out-alt"></i></a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'auth:profile' %}">{{ user.username }} <i
+                            class="fas fa-user-circle"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'auth:logout' %}">Выйти <i class="fas fa-sign-out-alt"></i></a>
+                </li>
                 {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'auth:login' %}">Войти <i class="fas fa-sign-in-alt"></i></a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'auth:login' %}">Войти <i class="fas fa-sign-in-alt"></i></a>
+                </li>
                 {% endif %}
             </ul>
         </div>
