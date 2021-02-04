@@ -45,4 +45,4 @@ class UserProfileForm(UserChangeForm):
             field.widget.attrs['class'] = 'form-control py-4'
         self.fields['username'].widget.attrs['readonly'] = True
         self.fields['email'].widget.attrs['readonly'] = True
-        self.fields['avatar'].widget.attrs['class'] = 'custom-file-input'
+        self.fields['avatar'].widget.attrs['class'] = 'custom-file-label'
