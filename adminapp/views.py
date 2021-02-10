@@ -23,3 +23,7 @@ def admin_users_create(request):
         form = UserAdminRegisterForm()
     context = {'form': form}
     return render(request, 'adminapp/admin-users-create.html', context)
+
+def admin_users_update(request, id=None):
+
+    return render(request, 'adminapp/admin-users-update-delete.html')
