@@ -24,7 +24,7 @@ def admin_users_create(request):
     context = {'form': form}
     return render(request, 'adminapp/admin-users-create.html', context)
 
-def admin_users_update(request, id=None):
+def admin_users_update(request, id):
     user = User.objects.get(id=id)
     if request.method == 'POST':
         form = UserAdminProfileForm(data=request.POST, files=request.FILES, instance=user)
@@ -35,3 +35,10 @@ def admin_users_update(request, id=None):
         form = UserAdminProfileForm(instance=user)
     context = {'form': form, 'current_user': user}
     return render(request, 'adminapp/admin-users-update-delete.html', context)
+
+def admin_users_delete(request, id):
+    user = User.objects.get(id=id)
+    # user.delete()
+    user.is_active = False
+    user.save()
+    return HttpResponseRedirect(reverse('admins:admin_users_read'))
