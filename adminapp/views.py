@@ -8,3 +8,6 @@ def index(request):
 def admin_users_read(request):
     context = {'users': User.objects.all()}
     return render(request, 'adminapp/admin-users-read.html', context)
+
+def admin_users_create(request):
+    return render(request, 'adminapp/admin-users-create.html')
