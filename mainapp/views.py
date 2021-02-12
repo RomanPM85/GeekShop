@@ -8,7 +8,8 @@ def index(request):
 
 
 def products(request, category_id=None):
-    context = {'categories': ProductCategory.objects.all(),}
-    products = Product.objects.filter(category_id=category_id) if category_id else Product.objects.all()
-    context.update({'products': products})
+    context = {
+        'categories': ProductCategory.objects.all(),
+        'products': Product.objects.filter(category_id=category_id) if category_id else Product.objects.all()
+    }
     return render(request, 'mainapp/products.html', context)
