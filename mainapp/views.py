@@ -11,7 +11,7 @@ def products(request, category_id=None):
     context = {'categories': ProductCategory.objects.all(),}
     if category_id:
         products = Product.objects.filter(category_id=category_id)
-        context.update({'products': products})
     else:
-        context.update({'products': Product.objects.all()})
+        products: Product.objects.all()
+    context.update({'products': products})
     return render(request, 'mainapp/products.html', context)
