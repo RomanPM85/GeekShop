@@ -1,6 +1,7 @@
 {% extends 'adminapp/base.html' %}
 
 {% block content %}
+    {{ title }}
     <h1 class="mt-4">Редактирование пользователя | {{ current_user.username }}</h1>
     <div class="card-body">
         <form action="{% url 'admins:admin_users_update' current_user.id %}" method="post"
