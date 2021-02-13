@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import user_passes_test
 from django.views.generic.list import ListView
+from django.utils.decorators import method_decorator
 
 from authapp.models import User
 from adminapp.forms import UserAdminRegisterForm, UserAdminProfileForm
@@ -15,6 +16,10 @@ def index(request):
 class UserListView(ListView):
     model = User
     template_name = 'adminapp/admin-users-read.html'
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, request, *args, **kwargs):
+        return super(UserListView, self).dispatch(request, *args, **kwargs)
 
 
 # описание контроллера через FBV
