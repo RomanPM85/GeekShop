@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import user_passes_test
 from django.views.generic.list import ListView
 from django.utils.decorators import method_decorator
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView,
 from django.urls import reverse_lazy
 
 from authapp.models import User
@@ -33,7 +33,20 @@ class UserCreateView(CreateView):
     def dispatch(self, request, *args, **kwargs):
         return super(UserCreateView, self).dispatch(request, *args, **kwargs)
 
+class UserUpdateView(UpdateView):
+    model = User
+    template_name = 'adminapp/admin-users-update-delete.html'
+    form_class = UserAdminProfileForm
+    success_url = reverse_lazy('admins:admin_users_read')
 
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, request, *args, **kwargs):
+        return super(UserUpdateView, self).dispatch(request, *args, **kwargs
+
+    def get_context_data(self, **kwargs):
+        context = super(UserUpdateView, self).get_context_data(**kwargs)
+        context['title'] = 'GeekShop - Редактирование пользователя'
+        return context
 
 # описание контроллера через FBV
 
@@ -56,18 +69,18 @@ class UserCreateView(CreateView):
 #     context = {'form': form}
 #     return render(request, 'adminapp/admin-users-create.html', context)
 
-@user_passes_test(lambda u: u.is_superuser)
-def admin_users_update(request, id):
-    user = User.objects.get(id=id)
-    if request.method == 'POST':
-        form = UserAdminProfileForm(data=request.POST, files=request.FILES, instance=user)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('admins:admin_users_read'))
-    else:
-        form = UserAdminProfileForm(instance=user)
-    context = {'form': form, 'current_user': user}
-    return render(request, 'adminapp/admin-users-update-delete.html', context)
+# @user_passes_test(lambda u: u.is_superuser)
+# def admin_users_update(request, id):
+#     user = User.objects.get(id=id)
+#     if request.method == 'POST':
+#         form = UserAdminProfileForm(data=request.POST, files=request.FILES, instance=user)
+#         if form.is_valid():
+#             form.save()
+#             return HttpResponseRedirect(reverse('admins:admin_users_read'))
+#     else:
+#         form = UserAdminProfileForm(instance=user)
+#     context = {'form': form, 'current_user': user}
+#     return render(request, 'adminapp/admin-users-update-delete.html', context)
 
 @user_passes_test(lambda u: u.is_superuser)
 def admin_users_delete(request, id):
