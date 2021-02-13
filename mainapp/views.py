@@ -17,11 +17,11 @@ def index(request):
 
 def products(request, category_id=None, page=1):
     if category_id:
-        products = Product.objects.filter(category_id=category_id).order_by('price')
+        products = Product.objects.filter(category_id=category_id)
     else:
-        products = Product.objects.all().order_by('price')
+        products = Product.objects.all()
     per_page = 3
-    paginator = Paginator(products, per_page)
+    paginator = Paginator(products.order_by('price'), per_page)
     # если ошибок нет
     products_paginator = paginator.page(page)
     context = {'categories': ProductCategory.objects.all(), 'products': products_paginator}
