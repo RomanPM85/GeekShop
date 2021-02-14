@@ -2,9 +2,9 @@
 
 {% block content %}
     {{ title }}
-    <h1 class="mt-4">Редактирование пользователя | {{ current_user.username }}</h1>
+    <h1 class="mt-4">Редактирование пользователя | {{ user.username }}</h1>
     <div class="card-body">
-        <form action="{% url 'admins:admin_users_update' current_user.id %}" method="post"
+        <form action="{% url 'admins:admin_users_update' user.id %}" method="post"
               enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-row">
