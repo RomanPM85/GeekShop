@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import user_passes_test
 from django.views.generic.list import ListView
 from django.utils.decorators import method_decorator
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
 from authapp.models import User
@@ -48,7 +48,20 @@ class UserUpdateView(UpdateView):
         context['title'] = 'GeekShop - Редактирование пользователя'
         return context
 
+class UserDeleteView(DeleteView):
+    model = User
+    template_name = 'adminapp/admin-users-update-delete.html'
+    success_url = reverse_lazy('admins:admin_users_read')
 
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, request, *args, **kwargs):
+        return super(UserDeleteView, self).dispatch(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.is_active = False
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
 
 
 
