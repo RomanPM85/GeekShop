@@ -63,12 +63,6 @@ class UserDeleteView(DeleteView):
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
 
-
-
-
-
-
-
 # описание контроллера через FBV
 
 # @user_passes_test(lambda u: u.is_superuser)
@@ -102,11 +96,11 @@ class UserDeleteView(DeleteView):
 #         form = UserAdminProfileForm(instance=user)
 #     context = {'form': form, 'current_user': user}
 #     return render(request, 'adminapp/admin-users-update-delete.html', context)
-
-@user_passes_test(lambda u: u.is_superuser)
-def admin_users_delete(request, id):
-    user = User.objects.get(id=id)
-    # user.delete()
-    user.is_active = False
-    user.save()
-    return HttpResponseRedirect(reverse('admins:admin_users_read'))
+#
+# @user_passes_test(lambda u: u.is_superuser)
+# def admin_users_delete(request, id):
+#     user = User.objects.get(id=id)
+#     # user.delete()
+#     user.is_active = False
+#     user.save()
+#     return HttpResponseRedirect(reverse('admins:admin_users_read'))
