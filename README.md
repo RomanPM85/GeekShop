@@ -1,8 +1,9 @@
-###GeekShop
-####Lesson_1
-####Lesson_2
-####Lesson_3
-####Lesson_4
-####Lesson_5
-####Lesson_6
-####started Lesson_7 "Own admin panel"
+###GeekShop "The Basics Of Django Framework"
+####Lesson_1 "Introduction to the framework"
+####Lesson_2 "Template + Context = html"
+####Lesson_3 "Models + ORM = Data"
+####Lesson_4 "User authentication and registration"
+####Lesson_5 "User + product = shopping cart"
+####Lesson_6 "Shopping cart + AJAX + Decorators"
+####Lesson_7 "Own admin panel"
+####started Lesson_8 "Useful: page output, template filters, CBV"

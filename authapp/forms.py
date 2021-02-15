@@ -34,7 +34,8 @@ class UserRegisterForm(UserCreationForm):
 
 
 class UserProfileForm(UserChangeForm):
-    avatar = forms.ImageField(widget=forms.FileInput())
+    avatar = forms.ImageField(widget=forms.FileInput(), required=False)
+#     добавлеям required=False,  если нужна необязательная загрузка фото.
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'avatar', 'username', 'email')
