@@ -6,4 +6,7 @@
 ####Lesson_5 "User + product = shopping cart"
 ####Lesson_6 "Shopping cart + AJAX + Decorators"
 ####Lesson_7 "Own admin panel"
-####started Lesson_8 "Useful: page output, template filters, CBV"
+####Lesson_8 "Useful: page output, template filters, CBV"
+
+###GeekShop "Django Framework. Optimization tools"
+####started Lesson 1. Sending email. Context processors
