@@ -3,10 +3,23 @@ from django.contrib import auth
 from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, Http404
 
 from authapp.forms import UserLoginForm, UserRegisterForm, UserProfileForm
 from basket.models import Basket
+from .models import User
 
+def verify(request, user_id, hash):
+    user = User.objects.get(pk=user_id)
+    if user.activation_key == hash and not user.is_activation_key_expired():
+        user.is_active = True
+        user.activation_key = None
+        user.save()
+        return HttpResponseRedirect(reverse('index'))
+
+    return Http404('hello')
+
+    # return HttpResponse(f'{user_id} {hash}')
 
 def login(request):
     if request.method == 'POST':
