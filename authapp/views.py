@@ -8,6 +8,7 @@ from django.http import HttpResponse, Http404
 from authapp.forms import UserLoginForm, UserRegisterForm, UserProfileForm
 from basket.models import Basket
 from .models import User
+from .utilis import send_verify_mail
 
 def verify(request, user_id, hash):
     user = User.objects.get(pk=user_id)
@@ -41,8 +42,9 @@ def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(data=request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request, 'Вы успешно зарегистрировались!')
+            user = form.save()
+            send_verify_mail(user)
+            messages.success(request, 'Проверьте почту')
             return HttpResponseRedirect(reverse('auth:login'))
         else:
             print(form.errors)
