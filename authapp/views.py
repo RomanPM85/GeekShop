@@ -17,9 +17,10 @@ def verify(request, user_id, hash):
         user.activation_key = None
         user.save()
         auth.login(request, user)
-        return HttpResponseRedirect(reverse('index'))
-
-    return Http404('hello')
+        messages.success(request, 'Вы авторизованы')
+        # return HttpResponseRedirect(reverse('index'))
+    return render(request, 'authapp/verification.html')
+    # return Http404('hello')
 
     # return HttpResponse(f'{user_id} {hash}')
 
