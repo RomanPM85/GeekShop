@@ -16,6 +16,7 @@ def verify(request, user_id, hash):
         user.is_active = True
         user.activation_key = None
         user.save()
+        auth.login(request, user)
         return HttpResponseRedirect(reverse('index'))
 
     return Http404('hello')
