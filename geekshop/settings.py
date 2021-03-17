@@ -136,9 +136,17 @@ EMAIL_HOST = 'localhost'
 EMAIL_PORT = '25'
 EMAIL_HOST_USER = 'django@geekshop.local'
 EMAIL_HOST_PASSWORD = 'geekshop'
-EMAIL_USE_SSL = False
+EMAIL_USE_SSL = True
 
 EMAIL_HOST_USER = None
 
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = 'tmp/email-messages/'
+# EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+# EMAIL_FILE_PATH = 'tmp/email-messages/'
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',  # По умолчанию
+    'social_core.backends.vk.VKOAuth2',  # для соц.сети вконтакте
+)
+
+SOCIAL_AUTH_VK_OAUTH2_KEY =
+SOCIAL_AUTH_VK_OAUTH2_SECRET = ''
