@@ -17,3 +17,6 @@ installation packages pip in the file  requirements.txt
 
 ####started Lesson 2. Registration via a social network. Django-ORM: one-to-one communication
 
+https://vk.com/dev  «ВКонтакте»: создаем и настраиваем приложение
+
+
