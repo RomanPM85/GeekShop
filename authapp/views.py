@@ -18,11 +18,8 @@ def verify(request, user_id, hash):
         user.save()
         auth.login(request, user)
         messages.success(request, 'Вы авторизованы')
-        # return HttpResponseRedirect(reverse('index'))
     return render(request, 'authapp/verification.html')
-    # return Http404('hello')
 
-    # return HttpResponse(f'{user_id} {hash}')
 
 def login(request):
     if request.method == 'POST':

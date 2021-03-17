@@ -10,5 +10,4 @@ def send_verify_mail(user):
     massage = f'Пройдите по ссылке {verify_link}'
 
     result = send_mail(title, massage, settings.EMAIL_HOST_USER, [user.email, ],  fail_silently=False)
-    print(result)
     return result
