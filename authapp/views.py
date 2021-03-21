@@ -10,6 +10,7 @@ from basket.models import Basket
 from .models import User
 from .utilis import send_verify_mail
 
+
 def verify(request, user_id, hash):
     user = User.objects.get(pk=user_id)
     if user.activation_key == hash and not user.is_activation_key_expired():
@@ -56,6 +57,7 @@ def register(request):
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('index'))
+
 
 @login_required
 def profile(request):
