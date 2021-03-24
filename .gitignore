@@ -5,3 +5,6 @@ venv/
 #игнорирование директорий нуля или более каталогов.
 **/__pycache__/
 /media
+management/
+tmp/
+geekshop/vk.json

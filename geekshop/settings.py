@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
-import os
+import os, json
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'mainapp',
     'authapp',
     'basket',
-    'adminapp'
+    'adminapp',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'geekshop.urls'
@@ -64,6 +66,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                #'mainapp.context_processors.user_status',
             ],
         },
     },
@@ -127,3 +130,27 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 AUTH_USER_MODEL = 'authapp.User'
 
 LOGIN_URL = '/auth/login/'
+
+DOMAIN_NAME = 'http://localhost:8000'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = '25'
+EMAIL_HOST_USER = 'django@geekshop.local'
+EMAIL_HOST_PASSWORD = 'geekshop'
+EMAIL_USE_SSL = True
+
+
+# EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+# EMAIL_FILE_PATH = 'tmp/email-messages/'
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.vk.VKOAuth2',
+)
+
+# Загружаем секреты из файла
+with open('geekshop/vk.json', 'r') as f:
+    VK = json.load(f)
+
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = VK['SOCIAL_AUTH_VK_OAUTH2_KEY']
+SOCIAL_AUTH_VK_OAUTH2_SECRET = VK['SOCIAL_AUTH_VK_OAUTH2_SECRET']
